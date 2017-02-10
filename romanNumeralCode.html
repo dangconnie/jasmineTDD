@@ -1,0 +1,83 @@
+<!-- Write unit tests in Jasmine that will test a Roman numeral program. The program should be passed an integer and return the correct Roman numeral.
+It must pass a test for 1, 4, 5, 9, 23, 73, 112. More if you wish.
+Rules: http://www.factmonster.com/ipka/A0769547.html
+Ideally your converter should work up to 1009
+ -->
+
+<script>
+
+
+// Original Roman Numeral Converter Code: 
+var romanNChart = {
+  1:"I",
+  4:"IV",
+  5:"V",
+  9:"IX",
+  10:"X",
+  40:"XL",
+  50:"L",
+  90:"XC",
+  100:"C",
+  400: "CD",
+  500: "D",
+  900: "CM",
+  1000:"M"
+}
+
+var romanNumberalString = "";
+function makeMeRoman(num){
+  var keyArray = [1000,900,500,400,100,90,50,40,10,9,5,4,1];
+  for(let i = 0; i<keyArray.length; i++){
+    var currentKey = keyArray[i];
+    if(num / currentKey >= 1){
+      var multplier = Math.floor(num/currentKey);
+      var remainder = num - multplier * currentKey;
+      for(let j = 0; j < multplier; j++){
+        romanNumberalString += romanNChart[currentKey];
+      }
+      makeMeRoman(remainder);
+      return romanNumberalString;
+    }
+    if(num / currentKey == 0){
+      return romanNumberalString;
+    }
+  }
+}
+
+makeMeRoman(1944);
+
+
+
+
+
+
+
+
+
+
+// <!-- JT's New and Improved Roman Numeral Code -->
+
+function toRoman(num){
+  var lookup = {'M':1000, "CM": 900, "D": 500, "CD": 400, "C": 100, "XC": 90, "L": 50, "XL": 40, "X": 10, "IX": 9, 'V': 5, 'IV': 4, 'I': 1}, roman = '', i;
+  
+  for(i in lookup){
+    while(num >= lookup[i]){
+      roman += i;
+      num -= lookup[i];
+    }
+  }
+  console.log(roman)
+  return roman;
+}
+
+toRoman(123)
+toRoman(234)
+toRoman(45)
+toRoman(2)
+
+// Resource:
+// http://ricostacruz.com/cheatsheets/jasmine.html
+
+
+
+</script>
